@@ -1,0 +1,48 @@
+{
+  "verified_utc": "2026-10-02T11:33:23.043613+00:00",
+  "repository": "https://github.com/m11ahmed/PitWall",
+  "visibility": "public",
+  "branch": "main",
+  "render_checked_commit": "655beceb93c3936b660bf21cfced05ae88e4e96f",
+  "public_pages": [
+    {
+      "page": "readme",
+      "status": 200,
+      "images": [
+        {
+          "alt": "Six-weekend evaluation dashboard with fixed training, validation and test races",
+          "width": 1440,
+          "height": 1100
+        }
+      ],
+      "displayed_scores": true
+    },
+    {
+      "page": "engineering",
+      "status": 200,
+      "images": [
+        {
+          "alt": "Bahrain matched race-lap comparison and contiguous windows",
+          "width": 1440,
+          "height": 1000
+        },
+        {
+          "alt": "Bahrain lap 21 native speed, throttle and brake traces with sampling diagnostics",
+          "width": 1440,
+          "height": 1100
+        },
+        {
+          "alt": "Fixed race roles, target counts and held-out baseline comparison",
+          "width": 1440,
+          "height": 1100
+        }
+      ],
+      "displayed_scores": true
+    }
+  ],
+  "local_document_links_and_anchors": "passed",
+  "readme_metrics_match_saved_csvs": true,
+  "unchanged_frozen_files": 69,
+  "dashboard_hosting": "not deployed",
+  "scope": "Portfolio documentation and publication; no implementation, data, model or evaluation change."
+}
