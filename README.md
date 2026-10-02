@@ -1,8 +1,8 @@
-# PitWall — F1 Telemetry & Race Pace Lab
+# PitWall F1 Telemetry & Race Pace Lab
 
-An independent motorsport data-science portfolio exploring two questions:
+An independent motorsport data science portfolio exploring two questions:
 how do drivers' observed race laps compare under explicit selection rules,
-and can a next-lap model beat recent-lap baselines on later race weekends?
+and can a next lap model beat recent-lap baselines on later race weekends?
 
 PitWall combines audited public timing, native telemetry inspection and two
 separate historical forecasting studies. The dashboard exposes exclusions,
