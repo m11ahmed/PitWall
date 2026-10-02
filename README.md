@@ -1,244 +1,136 @@
-# PitWall - F1 Telemetry & Race Pace Lab
+# PitWall — F1 Telemetry & Race Pace Lab
 
-An independent motorsport data-science portfolio using public historical data.
-The local dashboard contains a detailed Bahrain 2024 Ferrari case study and a
-separate six-weekend ML evaluation covering Ferrari, Mercedes and Red Bull drivers.
-Analysis, telemetry and both trained models run without an API key or paid provider.
-PitWall lives on G: and is separate from the banking application.
+An independent motorsport data-science portfolio exploring two questions:
+how do drivers' observed race laps compare under explicit selection rules,
+and can a next-lap model beat recent-lap baselines on later race weekends?
 
-## Open the dashboard
+PitWall combines audited public timing, native telemetry inspection and two
+separate historical forecasting studies. The dashboard exposes exclusions,
+sampling limitations and baseline wins alongside the results. It runs locally
+without an API key or paid service.
 
-From PowerShell:
+**Start here:** [Engineering overview](ENGINEERING_OVERVIEW.md) ·
+[Bahrain case study](CASE_STUDY.md) ·
+[Whole-weekend model card](WEEKEND_MODEL_CARD.md) ·
+[Validation evidence](VALIDATION.md)
 
-```powershell
-Set-Location "G:\PitWall"
-.\.venv\Scripts\python.exe -m streamlit run app.py
-```
+![Six-weekend evaluation dashboard with fixed training, validation and test races](reports/dashboard_weekends.png)
 
-Open [the local dashboard](http://127.0.0.1:8501). Keep PowerShell open while it
-runs; press Ctrl+C in that window to stop it. Interactions read local exports and
-do not download race data or refit a model.
+*The Across weekends view keeps event roles, coverage and held-out scores visible.
+Driver/team associations refer to the selected 2024 races.*
 
-## Explore it
+## What you can inspect
 
-The **Study** control switches between two independent views:
+| Study | Evidence | Dashboard view |
+|---|---|---|
+| Bahrain 2024, LEC/SAI | 114 recorded laps; 101 eligible; 46 same-compound matched pairs | Race pace, Tyre stints, Lap audit |
+| Bahrain native telemetry | 41,286 public car samples; 64 of 101 eligible laps support conservative distance alignment | Telemetry |
+| Conditional next-lap ML | Original Bahrain pilot plus a separate six-driver, six-weekend evaluation | ML pace, Across weekends |
 
-- **Bahrain case study**: LEC/SAI race pace, tyre stints, telemetry, the first
-  chronological ML pilot and the lap audit. Its sidebar controls drivers,
-  race-lap window, cohort and comparison reference.
-- **Across weekends**: the separate whole-weekend evaluation for
-  LEC/SAI/HAM/RUS/VER/PER. Select test or validation weekends, weekends and drivers
-  using that view's own controls. Inspect overall/event/driver errors, baseline
-  wins, coverage and numeric training-range checks. The Bahrain sidebar does not
-  filter this study.
+Downloads retain lap/event identity, selection reasons and predictions from
+all methods. Changing dashboard filters recomputes displayed scores from saved
+forecasts; it never refits the model.
 
-In the Bahrain case study:
+## Main ML result
 
-- Race pace shows eligible/all recorded laps with timing, compound and exclusions.
-- Tyre stints compares shared eligible race laps, with matching compounds by default.
-- Telemetry shows speed, throttle and brake on/off for selected laps. Compare the
-  same race lap/compound or choose laps separately with context visible. Switch
-  between elapsed time and estimated distance; optional common-distance alignment
-  exposes its sampling limits.
-- ML pace replays held-out estimates from the frozen first Ridge model, alongside
-  both baselines. Validation and final test results remain distinct.
-- Lap audit exposes each selection rule and individual excluded records.
+The expanded Ridge model predicts a correction to the last observed lap time.
+It uses completed-lap timing, reported tyre usage, driver and compound; telemetry
+is inspected separately and does not enter either model.
 
-Downloads include audits, matched pairs, selected native/aligned telemetry and
-held-out predictions. Changing filters never trains a model.
+Whole Bahrain/Australia/Japan weekends provide **708 training targets**.
+**232 China targets** select alpha 10 from a fixed grid; preprocessing and the
+training fit then remain frozen. Miami and Imola supply **596 test targets**.
+All three methods score the same actual consecutive eligible laps.
 
-Lap-time delta = comparison time minus reference time; negative means the
-comparison driver's recorded time was lower. Speed difference has the same
-comparison direction in km/h and does not measure time gain. ML signed error =
-prediction minus observed time; positive means predicted slower.
+| Method | Test MAE (s) | Test RMSE (s) |
+|---|---:|---:|
+| Ridge correction | 0.280751 | 0.401706 |
+| Repeat the last lap | 0.288183 | 0.419431 |
+| Median of up to 3 preceding eligible laps | 0.287437 | 0.417424 |
 
-## Set up a new environment on G:
+The pooled gain over the last-lap baseline is **0.007432 s MAE**. It is small
+and inconsistent: Ridge loses in Miami and to a baseline for HAM, PER and VER.
+Two later weekends with the same six drivers provide limited evidence of transfer.
+No significance or general predictive superiority is claimed. See the
+[per-weekend/per-driver results](WEEKEND_MODEL_CARD.md#held-out-results).
 
-Fresh installation was verified on Windows with Python 3.14.0, including all
-86 tests and desktop/mobile dashboard checks. Use Python 3.14; the measured
-environment uses scikit-learn 1.9.1. The complete version-pinned environment is requirements-lock.txt;
-requirements.txt lists the main project dependencies.
+The preserved Bahrain pilot uses different targets: 22 final-test laps, with
+Ridge MAE 0.143864 s versus last lap 0.155909 s; Ridge loses for LEC. These two
+studies are separate evaluations, not before/after versions of one score.
 
-The repository includes the study exports and frozen results. Opening the
-existing dashboard needs no FastF1 cache, race download, model training or API key.
-Installing dependencies requires internet access; running the exported studies
-is local. Extraction of native telemetry again requires acquisition of the
-FastF1 session cache.
+## Run locally
 
-From PowerShell after putting the repository on G:
+**Verified platform:** Windows, Python 3.14.0. Clone or download the repository
+onto your preferred drive. From the project directory, with Python 3.14 on PATH:
 
 ```powershell
-Set-Location "G:\PitWall"
 .\scripts\setup.ps1
 .\.venv\Scripts\python.exe -m streamlit run app.py
 ```
 
-If python is not on PATH, supply your installed Python 3.14 executable explicitly:
+If python is unavailable, supply the actual path to your installed interpreter:
 
 ```powershell
 .\scripts\setup.ps1 -PythonExecutable "C:\path\to\Python314\python.exe"
 ```
 
-The C: path above is an example for an already installed interpreter. The script
-places the virtual environment and temporary installation files inside the
-project on G: and disables pip's download cache. It checks Python's version,
-installs the lock file and runs pip check. No new race acquisition or fitting is
-performed. The Windows py launcher is optional and is not required by the script.
+Open [localhost:8501](http://127.0.0.1:8501/). Select **Bahrain case study** for
+pace/telemetry/the original pilot, or **Across weekends** for the expanded study.
+The supplied exports and frozen results work without race downloads, a FastF1
+cache or training. Dependency installation uses the internet. The setup script
+keeps the environment and temporary installation files inside the project,
+including when it is on G:.
 
-For another checkout location, change Set-Location to that folder. Runtime paths
-are resolved relative to the project, not to the original G:\PitWall directory.
-The script is for Windows PowerShell; other OS installations have not been checked.
+The full pinned environment is requirements-lock.txt. Detailed commands for
+acquisition, offline training and telemetry regeneration are in
+[REPRODUCING.md](REPRODUCING.md). Native telemetry regeneration requires the
+separately acquired FastF1 session cache.
 
-## Repository contents
+## Evidence and limits
 
-Code, tests, documentation, small public-data exports, frozen model/results and
-selected screenshots are included. Local environments, FastF1 cache, tmp/ and
-local secret files are ignored. .gitattributes preserves exact file bytes,
-including line endings, because the experiment manifests verify SHA256 hashes.
-Do not normalize line endings in frozen protocol/code/data files without declaring
-and regenerating a new experiment.
+Public lap times and native speed/throttle/brake samples are observations;
+reported tyre usage is metadata. Integrated distance, aligned differences and
+model forecasts are estimates. Private fuel load, tyre wear/temperatures, brake
+pressure and engineering setup are unavailable. This project has no team affiliation.
 
-Raw measurements remain distinct from estimates. Public data accessed through
-FastF1 are not claimed as PitWall-owned or privately sourced team data. This local
-repository preparation has not published or hosted the project.
+Analysis eligibility does not imply clear air. Matching race lap and compound
+does not equalize tyre age, fuel or pace management. Sample-origin distance is
+not exact track position, and a speed difference is not a corner time gain.
 
-## Acquire and reproduce the Bahrain study
+Forecast scoring conditions on final archived eligibility of both t and t+1,
+within the same known stint/compound. It does not predict pit stops, incidents
+or future eligibility. Feed latency and flag revisions are untested; adjacent
+errors are correlated. The expanded study covers six selected drivers and two
+test weekends, not a full season or unseen-driver performance.
 
-```powershell
-Set-Location "G:\PitWall"
-.\.venv\Scripts\python.exe download_data.py
-.\.venv\Scripts\python.exe analyze_data.py
-.\.venv\Scripts\python.exe export_telemetry.py
-.\.venv\Scripts\python.exe train_model.py
-```
-
-The downloader uses the public network and creates the FastF1 cache. The other
-commands work offline. Telemetry export requires the existing session cache;
-it does not fetch missing data. It checks cached lap timing against the original
-CSV and slices native car samples without interpolated lap boundaries or merged
-position data.
-
-train_model.py writes models/pace_ridge.joblib and reports/ml/ tables plus a
-provenance manifest. It reloads its locally generated fitted model and verifies
-matching predictions. The dashboard uses exported tables rather than deserializing
-the model and checks source/artifact hashes.
-
-## Acquire and reproduce the whole-weekend study
+## Verify and review
 
 ```powershell
-Set-Location "G:\PitWall"
-New-Item -ItemType Directory -Path "G:\PitWall\cache" -Force
-.\.venv\Scripts\python.exe download_weekends.py
-.\.venv\Scripts\python.exe train_weekends.py
-```
-
-The first command acquires the six fixed 2024 Race sessions with lap timing and
-race-control messages; it requests neither telemetry nor weather. After those
-exports exist, train_weekends.py works offline. The protocol/source hashes and
-six-driver/event identities are checked; missing required sources stop the run.
-The original Bahrain source/model/predictions/metrics are preserved and
-hash-checked around the expanded training run.
-
-The expanded model is models/weekend_ridge.joblib. Audit, predictions, metrics,
-coverage, domain checks and provenance are under reports/weekends/. The saved
-model's prediction roundtrip is verified. See
-[WEEKEND_PROTOCOL.md](WEEKEND_PROTOCOL.md) for fixed event roles and
-[WEEKEND_MODEL_CARD.md](WEEKEND_MODEL_CARD.md) for the full result.
-
-## Model evidence
-
-Both studies predict actual next lap t+1 after completed t, conditional on both
-laps being eligible in the same known stint/compound. Features use observed timing
-and reported metadata through t. Telemetry is not a predictor in either model.
-
-The first pilot contains 93 pairs: 52 train, 17 validation, 22 test and 2 purged.
-Ridge alpha 10 has final-test MAE 0.1439 s versus last-lap persistence 0.1559 s and
-trailing median 0.1806 s. Ridge loses to persistence for LEC. This remains the
-original result in [MODEL_CARD.md](MODEL_CARD.md) and
-[MODEL_PROTOCOL.md](MODEL_PROTOCOL.md).
-
-The separate expansion contains 1,967 raw laps, 1,664 eligible laps and 1,536
-consecutive examples from six drivers. Whole Bahrain/Australia/Japan weekends
-provide 708 training examples; China provides 232 validation examples. Alpha 10
-is selected on China; the training-fitted pipeline remains frozen for Miami/Imola.
-
-| Whole-weekend test method | MAE (s), 596 targets |
-|---|---:|
-| Ridge correction to last lap | 0.280751 |
-| Last-lap persistence | 0.288183 |
-| Trailing median, up to 3 laps | 0.287437 |
-
-The pooled gain over persistence is only 0.007432 s MAE. Ridge loses in Miami
-(0.281009 versus 0.280095 s); pooled driver results also include baseline wins.
-Two held-out weekends with the same six drivers provide limited event-transfer
-evidence, not unseen-driver or full-season validation. The newer and pilot MAEs
-use different targets and should not be compared as a before/after improvement.
-
-## Validate
-
-```powershell
-Set-Location "G:\PitWall"
 .\.venv\Scripts\python.exe -B -m unittest discover -s tests -v
 .\.venv\Scripts\python.exe -m pip check
 ```
 
-[VALIDATION.md](VALIDATION.md) records executed checks, browser evidence and limits.
+The latest executed full suite passed **86 tests** in a fresh environment.
+Saved-model replay, desktop/mobile rendering and CSV downloads were also
+verified. [VALIDATION.md](VALIDATION.md) records the checks and their limits;
+[release evidence](reports/release/verification.json) records the fresh-install run.
 
-## Files
+Data/source hashes, exclusion audits, predictions, coverage and error tables
+are included under data/ and reports/. Separate fitted pipelines are in models/.
+.gitattributes preserves exact bytes for provenance checks; environments,
+FastF1 cache, scratch files and local secrets are excluded from Git.
 
-- download_data.py, analyze_data.py and race_analysis.py: original acquisition,
-  timing audit, stint summaries and comparisons matched by race lap.
-- export_telemetry.py and telemetry_analysis.py: offline native samples, quality
-  diagnostics, estimated distance and supported alignment.
-- pace_model.py and train_model.py: original consecutive-lap pilot and artifacts.
-- download_weekends.py: fixed six-event timing/race-control acquisition.
-- weekend_model.py and train_weekends.py: event-local examples, whole-weekend
-  selection, baselines, metrics, domain checks and saved expanded model.
-- app.py, telemetry_ui.py, model_ui.py and weekend_ui.py: dashboard views/downloads.
-- data/bahrain_2024_ferrari_laps.csv: original 114-record timing export.
-- data/bahrain_2024_ferrari_telemetry.csv: 41,286 native car samples.
-- data/telemetry_manifest.json: acquisition hashes and per-lap quality.
-- data/weekends/: six raw race exports and source_manifest.json.
-- models/pace_ridge.joblib and models/weekend_ridge.joblib: separate fitted models.
-- reports/ml/ and reports/weekends/: separate experiment tables/manifests.
-- CASE_STUDY.md: original Bahrain findings and interpretation limits.
-- MODEL_CARD.md/MODEL_PROTOCOL.md and WEEKEND_MODEL_CARD.md/WEEKEND_PROTOCOL.md:
-  separate evidence and fixed evaluation procedures.
-- PROJECT_STATUS.md and VALIDATION.md: milestones and executed verification.
+## Documentation
 
-## Evidence boundary
-
-Analysis-eligible does not mean traffic-free. Equal race lap/compound do not
-establish equal tyre age, fuel load or pace management. Reported tyre usage counts
-laps, not measured wear.
-
-Speed, throttle and boolean brake come from public Bahrain data. Distance is a
-trapezoidal speed integral from the first recorded sample, not measured circuit
-position. Missing boundaries are not filled. Excessive sampling gaps/invalid
-speed withhold later distance; gaps also break elapsed-time chart lines. The
-explicit 1.0 s gap/boundary tolerance is an analysis choice.
-
-Optional 10 m alignment interpolates over common supported distance only.
-Speed/throttle use linear interpolation; brake uses preceding samples within
-valid runs. Different sample origins and driven paths limit spatial comparison.
-Sparse sampling cannot establish exact braking points or corner time gains.
-
-ML predictions are estimates. Target eligibility is established retrospectively;
-real-time delivery and flag revisions are untested. One-step replay observes
-preceding held-out lap times without retraining. Nearby errors are correlated;
-no accuracy percentage, calibrated interval or causal degradation estimate is
-provided. The timing-only expansion has no per-lap LapStartDate timestamps.
-
-Private fuel mass, tyre wear/temperatures, brake pressure and engineering setup
-are unavailable. No team affiliation is claimed.
-
-## Next
-
-Keep the declared test results fixed. Additional circuits, conditions or drivers
-need a separately declared study; model changes need fresh held-out evidence.
-Computer vision for annotated pit-stop video and drifting remain separately
-scoped later work. Public deployment and FastAPI/React integration are also future
-options once the analytical scope is stable.
+| Read | Purpose |
+|---|---|
+| [Engineering overview](ENGINEERING_OVERVIEW.md) | Questions, findings, engineering tradeoffs and reviewer walkthrough |
+| [Bahrain case study](CASE_STUDY.md) | Paired race pace, telemetry quality and original pilot |
+| [Pilot model card](MODEL_CARD.md) / [protocol](MODEL_PROTOCOL.md) | First study's fixed evaluation and evidence |
+| [Weekend model card](WEEKEND_MODEL_CARD.md) / [protocol](WEEKEND_PROTOCOL.md) | Whole-event split, subgroup failures and domain checks |
+| [Reproduction guide](REPRODUCING.md) | Setup, acquisition, offline training and artifact map |
+| [Project status](PROJECT_STATUS.md) | Completed milestones and future scope |
 
 Data tooling: [FastF1](https://github.com/theOehrly/Fast-F1).
-
+Computer vision for annotated pit-stop or drifting footage, new model experiments
+and public hosting remain separately scoped future work.
