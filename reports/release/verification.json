@@ -1,0 +1,60 @@
+{
+  "verified_utc": "2026-10-02T00:06:16.197324+00:00",
+  "platform": "Windows, Python 3.14.0",
+  "scope": "Local repository preparation; no publication or deployment",
+  "fresh_install": {
+    "isolated_venv": true,
+    "dependency_file": "requirements-lock.txt",
+    "dependency_file_sha256": "e37777c50eac99579c4f2c3b503853bd5173d3240cea8219edbb6e01ccfe886d",
+    "pip_check": "passed",
+    "setup_script_verification": "passed against newly installed environment"
+  },
+  "tested_export": {
+    "files": 82,
+    "bytes": 7850436,
+    "all_index_and_export_bytes_matched": true,
+    "fastf1_cache_present": false,
+    "project_tmp_present_before_tests": false
+  },
+  "test_suite": {
+    "command": "python -B -m unittest discover -s tests -v",
+    "tests": 86,
+    "seconds": 103.612,
+    "result": "passed"
+  },
+  "model_replay": [
+    {
+      "study": "ml",
+      "predictions_verified": 39,
+      "max_abs_difference_seconds": 1.4210854715202004e-14
+    },
+    {
+      "study": "weekends",
+      "predictions_verified": 828,
+      "max_abs_difference_seconds": 1.4210854715202004e-14
+    }
+  ],
+  "browser": {
+    "server": "fresh installation on temporary localhost port 8502",
+    "desktop": "1440x1100",
+    "mobile": "390x844",
+    "page_errors": [],
+    "mobile_horizontal_overflow": false,
+    "pilot_prediction_download_rows": 22,
+    "weekend_prediction_download_rows": 596,
+    "full_weekend_audit_download_rows": 1967,
+    "weekend_replay": "Imola / VER",
+    "notes": "First audit download check timed out during a phase change; an isolated download succeeded and the complete check passed after waiting for the Streamlit rerun to finish."
+  },
+  "preservation": {
+    "existing_study_files_unchanged": true,
+    "unchanged_protected_files": 54,
+    "direct_dependency_declaration_added": "joblib==1.6.0; no version change"
+  },
+  "limits": [
+    "Other operating systems and Python minor versions not verified",
+    "Physical-phone interaction not verified",
+    "Public hosting and GitHub publication not performed",
+    "Raw telemetry regeneration requires separately acquired FastF1 session cache"
+  ]
+}

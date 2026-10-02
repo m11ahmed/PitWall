@@ -1,0 +1,37 @@
+EventKey,EventName,Year,RoundNumber,EventDate,Role,Driver,RecordedLaps,EligibleLaps,Examples,ExcludedLaps
+2024-01,Bahrain Grand Prix,2024,1,2024-03-02,train,HAM,57,49,43,8
+2024-01,Bahrain Grand Prix,2024,1,2024-03-02,train,LEC,57,50,46,7
+2024-01,Bahrain Grand Prix,2024,1,2024-03-02,train,PER,57,51,47,6
+2024-01,Bahrain Grand Prix,2024,1,2024-03-02,train,RUS,57,50,46,7
+2024-01,Bahrain Grand Prix,2024,1,2024-03-02,train,SAI,57,51,47,6
+2024-01,Bahrain Grand Prix,2024,1,2024-03-02,train,VER,57,49,44,8
+2024-03,Australian Grand Prix,2024,3,2024-03-24,train,HAM,16,11,8,5
+2024-03,Australian Grand Prix,2024,3,2024-03-24,train,LEC,58,49,45,9
+2024-03,Australian Grand Prix,2024,3,2024-03-24,train,PER,58,49,45,9
+2024-03,Australian Grand Prix,2024,3,2024-03-24,train,RUS,57,49,45,8
+2024-03,Australian Grand Prix,2024,3,2024-03-24,train,SAI,58,51,48,7
+2024-03,Australian Grand Prix,2024,3,2024-03-24,train,VER,4,2,1,2
+2024-04,Japanese Grand Prix,2024,4,2024-04-07,train,HAM,53,43,39,10
+2024-04,Japanese Grand Prix,2024,4,2024-04-07,train,LEC,53,47,44,6
+2024-04,Japanese Grand Prix,2024,4,2024-04-07,train,PER,53,44,39,9
+2024-04,Japanese Grand Prix,2024,4,2024-04-07,train,RUS,53,44,40,9
+2024-04,Japanese Grand Prix,2024,4,2024-04-07,train,SAI,53,44,40,9
+2024-04,Japanese Grand Prix,2024,4,2024-04-07,train,VER,53,45,41,8
+2024-05,Chinese Grand Prix,2024,5,2024-04-21,validation,HAM,56,41,38,15
+2024-05,Chinese Grand Prix,2024,5,2024-04-21,validation,LEC,56,43,41,13
+2024-05,Chinese Grand Prix,2024,5,2024-04-21,validation,PER,56,41,38,15
+2024-05,Chinese Grand Prix,2024,5,2024-04-21,validation,RUS,56,41,38,15
+2024-05,Chinese Grand Prix,2024,5,2024-04-21,validation,SAI,56,41,38,15
+2024-05,Chinese Grand Prix,2024,5,2024-04-21,validation,VER,56,42,39,14
+2024-06,Miami Grand Prix,2024,6,2024-05-05,test,HAM,57,48,45,9
+2024-06,Miami Grand Prix,2024,6,2024-05-05,test,LEC,57,48,44,9
+2024-06,Miami Grand Prix,2024,6,2024-05-05,test,PER,57,47,43,10
+2024-06,Miami Grand Prix,2024,6,2024-05-05,test,RUS,57,46,42,11
+2024-06,Miami Grand Prix,2024,6,2024-05-05,test,SAI,57,48,44,9
+2024-06,Miami Grand Prix,2024,6,2024-05-05,test,VER,57,48,44,9
+2024-07,Emilia Romagna Grand Prix,2024,7,2024-05-19,test,HAM,63,59,57,4
+2024-07,Emilia Romagna Grand Prix,2024,7,2024-05-19,test,LEC,63,59,56,4
+2024-07,Emilia Romagna Grand Prix,2024,7,2024-05-19,test,PER,63,59,56,4
+2024-07,Emilia Romagna Grand Prix,2024,7,2024-05-19,test,RUS,63,58,55,5
+2024-07,Emilia Romagna Grand Prix,2024,7,2024-05-19,test,SAI,63,60,58,3
+2024-07,Emilia Romagna Grand Prix,2024,7,2024-05-19,test,VER,63,57,52,6

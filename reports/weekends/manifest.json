@@ -1,0 +1,425 @@
+{
+  "created_utc": "2026-10-01T23:32:44.298293+00:00",
+  "protocol": {
+    "experiment": "Conditional next-lap pace, fixed six-weekend 2024 evaluation",
+    "events": [
+      {
+        "EventKey": "2024-01",
+        "EventName": "Bahrain Grand Prix",
+        "Year": 2024,
+        "RoundNumber": 1,
+        "EventDate": "2024-03-02",
+        "Role": "train",
+        "recorded_laps": 342,
+        "eligible_laps": 300,
+        "examples": 273
+      },
+      {
+        "EventKey": "2024-03",
+        "EventName": "Australian Grand Prix",
+        "Year": 2024,
+        "RoundNumber": 3,
+        "EventDate": "2024-03-24",
+        "Role": "train",
+        "recorded_laps": 251,
+        "eligible_laps": 211,
+        "examples": 192
+      },
+      {
+        "EventKey": "2024-04",
+        "EventName": "Japanese Grand Prix",
+        "Year": 2024,
+        "RoundNumber": 4,
+        "EventDate": "2024-04-07",
+        "Role": "train",
+        "recorded_laps": 318,
+        "eligible_laps": 267,
+        "examples": 243
+      },
+      {
+        "EventKey": "2024-05",
+        "EventName": "Chinese Grand Prix",
+        "Year": 2024,
+        "RoundNumber": 5,
+        "EventDate": "2024-04-21",
+        "Role": "validation",
+        "recorded_laps": 336,
+        "eligible_laps": 249,
+        "examples": 232
+      },
+      {
+        "EventKey": "2024-06",
+        "EventName": "Miami Grand Prix",
+        "Year": 2024,
+        "RoundNumber": 6,
+        "EventDate": "2024-05-05",
+        "Role": "test",
+        "recorded_laps": 342,
+        "eligible_laps": 285,
+        "examples": 262
+      },
+      {
+        "EventKey": "2024-07",
+        "EventName": "Emilia Romagna Grand Prix",
+        "Year": 2024,
+        "RoundNumber": 7,
+        "EventDate": "2024-05-19",
+        "Role": "test",
+        "recorded_laps": 378,
+        "eligible_laps": 352,
+        "examples": 334
+      }
+    ],
+    "drivers": [
+      "LEC",
+      "SAI",
+      "HAM",
+      "RUS",
+      "VER",
+      "PER"
+    ],
+    "features": [
+      "OriginLapNumber",
+      "TyreLife",
+      "LastLapSeconds",
+      "TrailingDeltaSeconds",
+      "Driver",
+      "Compound"
+    ],
+    "residual_target": "TargetSeconds - LastLapSeconds",
+    "target": "Actual lap t+1, retrospectively eligible and in the same reported stint and compound",
+    "prediction_origin": "Nominal completion of lap t; public feed arrival latency and revisions are not replayed",
+    "eligibility": "Original nine-rule lap audit, applied identically to each event; final archived flags, not predicted",
+    "history": "At most three consecutive eligible laps through t; reset on exclusions, missing laps, invalid metadata, stint/compound changes, and every event boundary",
+    "split": "Whole events, chronologically fixed: train rounds 1/3/4; validation round 5; test rounds 6/7",
+    "counts": {
+      "train": 708,
+      "validation": 232,
+      "test": 596
+    },
+    "alphas": [
+      0.1,
+      1.0,
+      10.0,
+      100.0
+    ],
+    "selected_alpha": 10.0,
+    "selection": "Lowest pooled validation lap MAE; exact ties choose lowest alpha",
+    "fit": "Scaler, categorical encoder and Ridge fitted only on training races; selected fit frozen with no validation refit",
+    "baselines": [
+      "Last lap persistence",
+      "Trailing median of at most three laps through t"
+    ],
+    "signed_error": "Prediction minus actual seconds; positive means predicted slower",
+    "metrics": "Lap-weighted MAE/RMSE/bias, pooled by split and separately per event/driver; every valid example retained",
+    "metadata_features": "EventKey, EventName, Year, RoundNumber, EventDate and Role are bookkeeping only, never model inputs",
+    "category_policy": "One-hot categories fitted only on training races; known valid categories absent from training produce zero indicators with handle_unknown=ignore, not a learned category effect",
+    "category_support_by_split": {
+      "train": {
+        "Driver": {
+          "observed_categories": [
+            "HAM",
+            "LEC",
+            "PER",
+            "RUS",
+            "SAI",
+            "VER"
+          ],
+          "unknown_categories": [],
+          "unknown_example_count": 0
+        },
+        "Compound": {
+          "observed_categories": [
+            "HARD",
+            "MEDIUM",
+            "SOFT"
+          ],
+          "unknown_categories": [],
+          "unknown_example_count": 0
+        }
+      },
+      "validation": {
+        "Driver": {
+          "observed_categories": [
+            "HAM",
+            "LEC",
+            "PER",
+            "RUS",
+            "SAI",
+            "VER"
+          ],
+          "unknown_categories": [],
+          "unknown_example_count": 0
+        },
+        "Compound": {
+          "observed_categories": [
+            "HARD",
+            "MEDIUM",
+            "SOFT"
+          ],
+          "unknown_categories": [],
+          "unknown_example_count": 0
+        }
+      },
+      "test": {
+        "Driver": {
+          "observed_categories": [
+            "HAM",
+            "LEC",
+            "PER",
+            "RUS",
+            "SAI",
+            "VER"
+          ],
+          "unknown_categories": [],
+          "unknown_example_count": 0
+        },
+        "Compound": {
+          "observed_categories": [
+            "HARD",
+            "MEDIUM"
+          ],
+          "unknown_categories": [],
+          "unknown_example_count": 0
+        }
+      }
+    },
+    "limitations": [
+      "Six selected drivers, six 2024 races and two held-out weekends; broader generalization is untested",
+      "Same drivers recur across folds; this tests event transfer rather than unseen-driver transfer",
+      "Retrospective conditional cohort; no prediction of target eligibility, pit stops or incidents",
+      "Earlier observed validation/test laps may supply origin history without retraining",
+      "Adjacent lap errors are correlated; no independent-sample significance or calibrated interval claims",
+      "Public timing and reported metadata; no private fuel, tyre wear, setup or brake-pressure measurements",
+      "Fixed test weekends may expose failure; no test-score retuning or event replacement"
+    ]
+  },
+  "source_manifest_sha256": "e65afbe2ec8ca0b489a0ab60c670d0b80392419964f4e6c160855c126ae332f4",
+  "sources": [
+    {
+      "EventKey": "2024-01",
+      "EventName": "Bahrain Grand Prix",
+      "Year": 2024,
+      "RoundNumber": 1,
+      "EventDate": "2024-03-02",
+      "Role": "train",
+      "file": "2024-01_laps.csv",
+      "sha256": "fc6d578ef257d2b22d87e95eeffb9a8d3757ba0d3f93320bb3ffaa91cb59ad10",
+      "lap_records": 342,
+      "driver_records": {
+        "HAM": 57,
+        "LEC": 57,
+        "PER": 57,
+        "RUS": 57,
+        "SAI": 57,
+        "VER": 57
+      },
+      "race_control_message_records": 69,
+      "missing_flags": {
+        "Deleted": 0,
+        "IsAccurate": 0,
+        "FastF1Generated": 0
+      }
+    },
+    {
+      "EventKey": "2024-03",
+      "EventName": "Australian Grand Prix",
+      "Year": 2024,
+      "RoundNumber": 3,
+      "EventDate": "2024-03-24",
+      "Role": "train",
+      "file": "2024-03_laps.csv",
+      "sha256": "fa50860fe805a2efde7f4f873f6217ce929ed042b500b4931541bd2d84a75e4f",
+      "lap_records": 251,
+      "driver_records": {
+        "HAM": 16,
+        "LEC": 58,
+        "PER": 58,
+        "RUS": 57,
+        "SAI": 58,
+        "VER": 4
+      },
+      "race_control_message_records": 82,
+      "missing_flags": {
+        "Deleted": 0,
+        "IsAccurate": 0,
+        "FastF1Generated": 0
+      }
+    },
+    {
+      "EventKey": "2024-04",
+      "EventName": "Japanese Grand Prix",
+      "Year": 2024,
+      "RoundNumber": 4,
+      "EventDate": "2024-04-07",
+      "Role": "train",
+      "file": "2024-04_laps.csv",
+      "sha256": "ce4190f7c0b8fe4b0dc4ac8204b6d4e3b51f70bff226c9e5a1e231fb2e81fcb8",
+      "lap_records": 318,
+      "driver_records": {
+        "HAM": 53,
+        "LEC": 53,
+        "PER": 53,
+        "RUS": 53,
+        "SAI": 53,
+        "VER": 53
+      },
+      "race_control_message_records": 66,
+      "missing_flags": {
+        "Deleted": 0,
+        "IsAccurate": 0,
+        "FastF1Generated": 0
+      }
+    },
+    {
+      "EventKey": "2024-05",
+      "EventName": "Chinese Grand Prix",
+      "Year": 2024,
+      "RoundNumber": 5,
+      "EventDate": "2024-04-21",
+      "Role": "validation",
+      "file": "2024-05_laps.csv",
+      "sha256": "1202b64f310d7e44ac72e05da5ad93d41403fd476d0532b8e9b800d27a83bed5",
+      "lap_records": 336,
+      "driver_records": {
+        "HAM": 56,
+        "LEC": 56,
+        "PER": 56,
+        "RUS": 56,
+        "SAI": 56,
+        "VER": 56
+      },
+      "race_control_message_records": 56,
+      "missing_flags": {
+        "Deleted": 0,
+        "IsAccurate": 0,
+        "FastF1Generated": 0
+      }
+    },
+    {
+      "EventKey": "2024-06",
+      "EventName": "Miami Grand Prix",
+      "Year": 2024,
+      "RoundNumber": 6,
+      "EventDate": "2024-05-05",
+      "Role": "test",
+      "file": "2024-06_laps.csv",
+      "sha256": "6d89d357690a9e70d00417134be41cc4ee6d68160edf8619c0d51f9ddbbc9ebc",
+      "lap_records": 342,
+      "driver_records": {
+        "HAM": 57,
+        "LEC": 57,
+        "PER": 57,
+        "RUS": 57,
+        "SAI": 57,
+        "VER": 57
+      },
+      "race_control_message_records": 75,
+      "missing_flags": {
+        "Deleted": 0,
+        "IsAccurate": 0,
+        "FastF1Generated": 0
+      }
+    },
+    {
+      "EventKey": "2024-07",
+      "EventName": "Emilia Romagna Grand Prix",
+      "Year": 2024,
+      "RoundNumber": 7,
+      "EventDate": "2024-05-19",
+      "Role": "test",
+      "file": "2024-07_laps.csv",
+      "sha256": "d303682b85de8a8f954c6df006d387213602ca09d5bf80dbfd6d9baaf764c7a3",
+      "lap_records": 378,
+      "driver_records": {
+        "HAM": 63,
+        "LEC": 63,
+        "PER": 63,
+        "RUS": 63,
+        "SAI": 63,
+        "VER": 63
+      },
+      "race_control_message_records": 98,
+      "missing_flags": {
+        "Deleted": 0,
+        "IsAccurate": 0,
+        "FastF1Generated": 0
+      }
+    }
+  ],
+  "recorded_laps": 1967,
+  "eligible_laps": 1664,
+  "code_sha256": {
+    "weekend_model.py": "c4678da4d7817eff99ff9d65fec331d1fcc2bac9cbd6d731b42b15ef1353a576",
+    "pace_model.py": "6ed3020f12bf8996d302c236e3aa1d63a0d99a2e785b2c1028e1ca8cc136cc4c",
+    "train_weekends.py": "000b63cc2ab13f2c9a02b933c5b1f22f85b18c315df5d25b696712f3ad334de1",
+    "WEEKEND_PROTOCOL.md": "265caa0bc39c7126391b6d76ad20c35ee48bbb31a3480be44ef1f8374d3902ca"
+  },
+  "versions": {
+    "python": "3.14.0",
+    "scikit_learn": "1.9.1",
+    "fastf1": "3.8.3",
+    "numpy": "2.5.3",
+    "pandas": "2.3.3",
+    "joblib": "1.6.0"
+  },
+  "model": {
+    "file": "models/weekend_ridge.joblib",
+    "sha256": "b099d1fa221353465ea9673d145fdecbcb1dac4f3dada1821fb44996f31d0066",
+    "features": [
+      "OriginLapNumber",
+      "TyreLife",
+      "LastLapSeconds",
+      "TrailingDeltaSeconds",
+      "Driver",
+      "Compound"
+    ],
+    "roundtrip_prediction_verified": true
+  },
+  "original_pilot_sha256": {
+    "data/bahrain_2024_ferrari_laps.csv": "c0a921d8a638a8d788728ce9a6f908a0292c45269676936c63c1a88ac0c797b5",
+    "models/pace_ridge.joblib": "9f113e9bd829a6473f88ea0286b7ed8f23dad25be2479ac4513e949ec97ae063",
+    "reports/ml/manifest.json": "6d627ba2c02c6d0128285acdebce7ead6e96eda6e8a4cbfed528c806e97d89f5",
+    "reports/ml/predictions.csv": "b135d1856aaf852169088836f4ad10ecb803ff99d8d04b96fff7283e714548d4",
+    "reports/ml/metrics.csv": "9eae1ef042575fcc282eaccf32bd5d6dd616d6383a5072841a1eeb090477bc6c"
+  },
+  "original_pilot_unchanged": true,
+  "artifacts": {
+    "lap_audit.csv": {
+      "rows": 1967,
+      "sha256": "4c5505ec092bd1667dc5614402578de49fd5d0cf7b23fd0aaec7c93769adbeb7"
+    },
+    "examples.csv": {
+      "rows": 1536,
+      "sha256": "3d7ab1df7f6f557acf9eb3ca0423474f283631c15bcffad66157ce14ada1202f"
+    },
+    "predictions.csv": {
+      "rows": 828,
+      "sha256": "ac7d2961b847c0df316707352c74a0e47252bae74e84cee8bfc47a30f901dfa1"
+    },
+    "metrics.csv": {
+      "rows": 105,
+      "sha256": "c93b049e17aad1bdb43a9f8e70431c06154c0ed7ef067b1d159ce4abe082bbec"
+    },
+    "coverage.csv": {
+      "rows": 36,
+      "sha256": "664a9912b7d3efa537385ac094a7a41c05deff01aee27229aabf2e7bb6970c47"
+    },
+    "rule_counts.csv": {
+      "rows": 54,
+      "sha256": "d43d1a93677a11aa2f0644c411bed6cdb226b5a4903656c443a919c2d616fee5"
+    },
+    "alpha_validation.csv": {
+      "rows": 4,
+      "sha256": "baf0ab654f9b43cebd1323be26b491b46dcbc3039e77e52420a744eb1e0e7856"
+    },
+    "domain_checks.csv": {
+      "rows": 18,
+      "sha256": "b6303abb0273c1fc8a8e9e43d8b689a8db332f29bc6d2033b779c0864d6849a9"
+    },
+    "equal_weekend_metrics.csv": {
+      "rows": 3,
+      "sha256": "35e6a53c1c361bb2c0364ecaf8e6537b28f4e4bd9381117e31bceef9e671fc82"
+    }
+  }
+}

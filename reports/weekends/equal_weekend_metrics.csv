@@ -1,0 +1,4 @@
+Model,TestWeekends,EqualWeekendMAESeconds
+Persistence,2,0.2873111829775566
+Ridge,2,0.28077869002654
+Trailing median,2,0.2870388478767657

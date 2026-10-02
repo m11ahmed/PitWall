@@ -1,0 +1,19 @@
+EventKey,EventName,Role,Feature,Check,AffectedTargets,Targets,TrainingMin,TrainingMax
+2024-05,Chinese Grand Prix,validation,OriginLapNumber,Outside training range,0,232,2.0,56.0
+2024-05,Chinese Grand Prix,validation,TyreLife,Outside training range,3,232,2.0,35.0
+2024-05,Chinese Grand Prix,validation,LastLapSeconds,Outside training range,125,232,79.925,100.53
+2024-05,Chinese Grand Prix,validation,TrailingDeltaSeconds,Outside training range,0,232,-1.9904999999999973,1.179000000000002
+2024-05,Chinese Grand Prix,validation,Driver,Unseen training category,0,232,,
+2024-05,Chinese Grand Prix,validation,Compound,Unseen training category,0,232,,
+2024-06,Miami Grand Prix,test,OriginLapNumber,Outside training range,0,262,2.0,56.0
+2024-06,Miami Grand Prix,test,TyreLife,Outside training range,2,262,2.0,35.0
+2024-06,Miami Grand Prix,test,LastLapSeconds,Outside training range,0,262,79.925,100.53
+2024-06,Miami Grand Prix,test,TrailingDeltaSeconds,Outside training range,0,262,-1.9904999999999973,1.179000000000002
+2024-06,Miami Grand Prix,test,Driver,Unseen training category,0,262,,
+2024-06,Miami Grand Prix,test,Compound,Unseen training category,0,262,,
+2024-07,Emilia Romagna Grand Prix,test,OriginLapNumber,Outside training range,36,334,2.0,56.0
+2024-07,Emilia Romagna Grand Prix,test,TyreLife,Outside training range,5,334,2.0,35.0
+2024-07,Emilia Romagna Grand Prix,test,LastLapSeconds,Outside training range,8,334,79.925,100.53
+2024-07,Emilia Romagna Grand Prix,test,TrailingDeltaSeconds,Outside training range,1,334,-1.9904999999999973,1.179000000000002
+2024-07,Emilia Romagna Grand Prix,test,Driver,Unseen training category,0,334,,
+2024-07,Emilia Romagna Grand Prix,test,Compound,Unseen training category,0,334,,

@@ -1,0 +1,118 @@
+{
+  "created_utc": "2026-10-01T23:09:22.006260+00:00",
+  "case_study": "Bahrain 2024 race, LEC and SAI",
+  "source_file": "bahrain_2024_ferrari_laps.csv",
+  "source_sha256": "c0a921d8a638a8d788728ce9a6f908a0292c45269676936c63c1a88ac0c797b5",
+  "versions": {
+    "python": "3.14.0",
+    "scikit_learn": "1.9.1",
+    "numpy": "2.5.3",
+    "pandas": "2.3.3",
+    "joblib": "1.6.0"
+  },
+  "protocol": {
+    "experiment": "Conditional next-lap pace, Ferrari Bahrain 2024 pilot",
+    "target": "LapTimeSeconds of actual lap t+1, eligible and in the same reported stint and compound",
+    "prediction_origin": "Nominal completion of lap t (public Time elapsed seconds); feed arrival latency is not replayed",
+    "eligibility": "Established retrospectively using final archived flags for both laps; not predicted",
+    "features": [
+      "OriginLapNumber",
+      "TyreLife",
+      "LastLapSeconds",
+      "TrailingDeltaSeconds",
+      "Driver",
+      "Compound"
+    ],
+    "residual_target": "TargetSeconds - LastLapSeconds",
+    "history": "At most three consecutive eligible laps through t; reset on exclusions, missing laps, invalid metadata, stint or compound changes",
+    "split": "Global race wall-clock 60% training, 20% validation, 20% test; crossing pairs purged",
+    "session_start_seconds": 3599.911,
+    "session_end_seconds": 9144.616,
+    "train_cutoff_seconds": 6926.734,
+    "validation_cutoff_seconds": 8035.675,
+    "counts": {
+      "train": 52,
+      "validation": 17,
+      "test": 22,
+      "purged": 2
+    },
+    "alphas": [
+      0.1,
+      1.0,
+      10.0,
+      100.0
+    ],
+    "selected_alpha": 10.0,
+    "selection": "Lowest validation MAE; exact ties choose lowest alpha",
+    "fit": "Preprocessing and Ridge fitted only on training examples; selected training fit frozen; no validation refit",
+    "baselines": [
+      "Last lap persistence",
+      "Trailing median of at most three laps through t"
+    ],
+    "signed_error": "Prediction minus actual seconds; positive means predicted slower",
+    "limitations": [
+      "One event and two drivers, with small chronological evaluation cohorts",
+      "No claim of generalization to other races, drivers, circuits or weather",
+      "No private fuel, tyre wear, setup, brake pressure or team telemetry measurements",
+      "Validation/test origins may use preceding observed laps, matching sequential one-step forecasting",
+      "Target eligibility is retrospective; model does not predict pit stops, incidents or eligibility"
+    ]
+  },
+  "code_sha256": {
+    "pace_model.py": "6ed3020f12bf8996d302c236e3aa1d63a0d99a2e785b2c1028e1ca8cc136cc4c",
+    "train_model.py": "da4bae6a283beeb85c8697db782e9c65dad1294ca5d0be220fe2e0606e0df6b7",
+    "analyze_data.py": "4f13d7abdf59db09e310c58da17e09e29430688087e5fd90dc19680d10fb0f28",
+    "MODEL_PROTOCOL.md": "1ef1d26ade49598af81416d36af9f5e307f4abcfd1e4276ceb4565b6f19346cc"
+  },
+  "split": {
+    "session_start_seconds": 3599.911,
+    "session_end_seconds": 9144.616,
+    "train_cutoff_seconds": 6926.734,
+    "validation_cutoff_seconds": 8035.675
+  },
+  "split_counts": {
+    "train": 52,
+    "test": 22,
+    "validation": 17,
+    "purged": 2
+  },
+  "model": {
+    "file": "models/pace_ridge.joblib",
+    "sha256": "9f113e9bd829a6473f88ea0286b7ed8f23dad25be2479ac4513e949ec97ae063",
+    "roundtrip_prediction_verified": true,
+    "features": [
+      "OriginLapNumber",
+      "TyreLife",
+      "LastLapSeconds",
+      "TrailingDeltaSeconds",
+      "Driver",
+      "Compound"
+    ],
+    "training": "Training window only, frozen after validation selection."
+  },
+  "artifacts": {
+    "examples.csv": {
+      "sha256": "84fc10aece566ebd955949f09545f96ea43038289116caa7c1c3aea66ba5343c",
+      "rows": 93
+    },
+    "predictions.csv": {
+      "sha256": "b135d1856aaf852169088836f4ad10ecb803ff99d8d04b96fff7283e714548d4",
+      "rows": 39
+    },
+    "metrics.csv": {
+      "sha256": "9eae1ef042575fcc282eaccf32bd5d6dd616d6383a5072841a1eeb090477bc6c",
+      "rows": 18
+    },
+    "alpha_validation.csv": {
+      "sha256": "443d1eb233a4029803c611a0642ffb49f916c2dffb616e2444b8c0bf5c1a741e",
+      "rows": 4
+    }
+  },
+  "limits": [
+    "Retrospective conditional scoring: future lap eligibility is not predicted.",
+    "Post-race timing/flags; real-time availability and revision delays are untested.",
+    "One race, two drivers; held-out compounds are HARD; no across-race validation.",
+    "Rolling one-step replay observes earlier held-out laps without retraining.",
+    "Adjacent lap errors are correlated; no calibrated intervals or causal claims."
+  ]
+}

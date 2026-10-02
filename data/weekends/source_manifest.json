@@ -1,0 +1,175 @@
+{
+  "created_utc": "2026-10-01T23:22:59.916206+00:00",
+  "year": 2024,
+  "session_type": "Race",
+  "drivers": [
+    "LEC",
+    "SAI",
+    "HAM",
+    "RUS",
+    "VER",
+    "PER"
+  ],
+  "fastf1_version": "3.8.3",
+  "load_options": {
+    "laps": true,
+    "telemetry": false,
+    "weather": false,
+    "messages": true
+  },
+  "protocol_sha256": "265caa0bc39c7126391b6d76ad20c35ee48bbb31a3480be44ef1f8374d3902ca",
+  "complete": true,
+  "events": [
+    {
+      "EventKey": "2024-01",
+      "EventName": "Bahrain Grand Prix",
+      "Year": 2024,
+      "RoundNumber": 1,
+      "EventDate": "2024-03-02",
+      "Role": "train",
+      "file": "2024-01_laps.csv",
+      "sha256": "fc6d578ef257d2b22d87e95eeffb9a8d3757ba0d3f93320bb3ffaa91cb59ad10",
+      "lap_records": 342,
+      "driver_records": {
+        "HAM": 57,
+        "LEC": 57,
+        "PER": 57,
+        "RUS": 57,
+        "SAI": 57,
+        "VER": 57
+      },
+      "race_control_message_records": 69,
+      "missing_flags": {
+        "Deleted": 0,
+        "IsAccurate": 0,
+        "FastF1Generated": 0
+      }
+    },
+    {
+      "EventKey": "2024-03",
+      "EventName": "Australian Grand Prix",
+      "Year": 2024,
+      "RoundNumber": 3,
+      "EventDate": "2024-03-24",
+      "Role": "train",
+      "file": "2024-03_laps.csv",
+      "sha256": "fa50860fe805a2efde7f4f873f6217ce929ed042b500b4931541bd2d84a75e4f",
+      "lap_records": 251,
+      "driver_records": {
+        "HAM": 16,
+        "LEC": 58,
+        "PER": 58,
+        "RUS": 57,
+        "SAI": 58,
+        "VER": 4
+      },
+      "race_control_message_records": 82,
+      "missing_flags": {
+        "Deleted": 0,
+        "IsAccurate": 0,
+        "FastF1Generated": 0
+      }
+    },
+    {
+      "EventKey": "2024-04",
+      "EventName": "Japanese Grand Prix",
+      "Year": 2024,
+      "RoundNumber": 4,
+      "EventDate": "2024-04-07",
+      "Role": "train",
+      "file": "2024-04_laps.csv",
+      "sha256": "ce4190f7c0b8fe4b0dc4ac8204b6d4e3b51f70bff226c9e5a1e231fb2e81fcb8",
+      "lap_records": 318,
+      "driver_records": {
+        "HAM": 53,
+        "LEC": 53,
+        "PER": 53,
+        "RUS": 53,
+        "SAI": 53,
+        "VER": 53
+      },
+      "race_control_message_records": 66,
+      "missing_flags": {
+        "Deleted": 0,
+        "IsAccurate": 0,
+        "FastF1Generated": 0
+      }
+    },
+    {
+      "EventKey": "2024-05",
+      "EventName": "Chinese Grand Prix",
+      "Year": 2024,
+      "RoundNumber": 5,
+      "EventDate": "2024-04-21",
+      "Role": "validation",
+      "file": "2024-05_laps.csv",
+      "sha256": "1202b64f310d7e44ac72e05da5ad93d41403fd476d0532b8e9b800d27a83bed5",
+      "lap_records": 336,
+      "driver_records": {
+        "HAM": 56,
+        "LEC": 56,
+        "PER": 56,
+        "RUS": 56,
+        "SAI": 56,
+        "VER": 56
+      },
+      "race_control_message_records": 56,
+      "missing_flags": {
+        "Deleted": 0,
+        "IsAccurate": 0,
+        "FastF1Generated": 0
+      }
+    },
+    {
+      "EventKey": "2024-06",
+      "EventName": "Miami Grand Prix",
+      "Year": 2024,
+      "RoundNumber": 6,
+      "EventDate": "2024-05-05",
+      "Role": "test",
+      "file": "2024-06_laps.csv",
+      "sha256": "6d89d357690a9e70d00417134be41cc4ee6d68160edf8619c0d51f9ddbbc9ebc",
+      "lap_records": 342,
+      "driver_records": {
+        "HAM": 57,
+        "LEC": 57,
+        "PER": 57,
+        "RUS": 57,
+        "SAI": 57,
+        "VER": 57
+      },
+      "race_control_message_records": 75,
+      "missing_flags": {
+        "Deleted": 0,
+        "IsAccurate": 0,
+        "FastF1Generated": 0
+      }
+    },
+    {
+      "EventKey": "2024-07",
+      "EventName": "Emilia Romagna Grand Prix",
+      "Year": 2024,
+      "RoundNumber": 7,
+      "EventDate": "2024-05-19",
+      "Role": "test",
+      "file": "2024-07_laps.csv",
+      "sha256": "d303682b85de8a8f954c6df006d387213602ca09d5bf80dbfd6d9baaf764c7a3",
+      "lap_records": 378,
+      "driver_records": {
+        "HAM": 63,
+        "LEC": 63,
+        "PER": 63,
+        "RUS": 63,
+        "SAI": 63,
+        "VER": 63
+      },
+      "race_control_message_records": 98,
+      "missing_flags": {
+        "Deleted": 0,
+        "IsAccurate": 0,
+        "FastF1Generated": 0
+      }
+    }
+  ],
+  "lap_records": 1967
+}

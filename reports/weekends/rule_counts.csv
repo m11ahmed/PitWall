@@ -1,0 +1,55 @@
+EventKey,EventName,Role,Rule,FlaggedLaps
+2024-01,Bahrain Grand Prix,train,invalid_lap_time,0
+2024-01,Bahrain Grand Prix,train,invalid_lap_number,0
+2024-01,Bahrain Grand Prix,train,opening_lap,6
+2024-01,Bahrain Grand Prix,train,pit_in,12
+2024-01,Bahrain Grand Prix,train,pit_out,12
+2024-01,Bahrain Grand Prix,train,not_green_only,13
+2024-01,Bahrain Grand Prix,train,timing_not_accurate,30
+2024-01,Bahrain Grand Prix,train,deleted_or_unknown,5
+2024-01,Bahrain Grand Prix,train,generated_or_unknown,0
+2024-03,Australian Grand Prix,train,invalid_lap_time,3
+2024-03,Australian Grand Prix,train,invalid_lap_number,0
+2024-03,Australian Grand Prix,train,opening_lap,6
+2024-03,Australian Grand Prix,train,pit_in,10
+2024-03,Australian Grand Prix,train,pit_out,9
+2024-03,Australian Grand Prix,train,not_green_only,15
+2024-03,Australian Grand Prix,train,timing_not_accurate,38
+2024-03,Australian Grand Prix,train,deleted_or_unknown,1
+2024-03,Australian Grand Prix,train,generated_or_unknown,2
+2024-04,Japanese Grand Prix,train,invalid_lap_time,12
+2024-04,Japanese Grand Prix,train,invalid_lap_number,0
+2024-04,Japanese Grand Prix,train,opening_lap,6
+2024-04,Japanese Grand Prix,train,pit_in,17
+2024-04,Japanese Grand Prix,train,pit_out,17
+2024-04,Japanese Grand Prix,train,not_green_only,14
+2024-04,Japanese Grand Prix,train,timing_not_accurate,40
+2024-04,Japanese Grand Prix,train,deleted_or_unknown,4
+2024-04,Japanese Grand Prix,train,generated_or_unknown,0
+2024-05,Chinese Grand Prix,validation,invalid_lap_time,12
+2024-05,Chinese Grand Prix,validation,invalid_lap_number,0
+2024-05,Chinese Grand Prix,validation,opening_lap,6
+2024-05,Chinese Grand Prix,validation,pit_in,10
+2024-05,Chinese Grand Prix,validation,pit_out,10
+2024-05,Chinese Grand Prix,validation,not_green_only,71
+2024-05,Chinese Grand Prix,validation,timing_not_accurate,81
+2024-05,Chinese Grand Prix,validation,deleted_or_unknown,0
+2024-05,Chinese Grand Prix,validation,generated_or_unknown,0
+2024-06,Miami Grand Prix,test,invalid_lap_time,2
+2024-06,Miami Grand Prix,test,invalid_lap_number,0
+2024-06,Miami Grand Prix,test,opening_lap,6
+2024-06,Miami Grand Prix,test,pit_in,7
+2024-06,Miami Grand Prix,test,pit_out,7
+2024-06,Miami Grand Prix,test,not_green_only,38
+2024-06,Miami Grand Prix,test,timing_not_accurate,54
+2024-06,Miami Grand Prix,test,deleted_or_unknown,4
+2024-06,Miami Grand Prix,test,generated_or_unknown,0
+2024-07,Emilia Romagna Grand Prix,test,invalid_lap_time,0
+2024-07,Emilia Romagna Grand Prix,test,invalid_lap_number,0
+2024-07,Emilia Romagna Grand Prix,test,opening_lap,6
+2024-07,Emilia Romagna Grand Prix,test,pit_in,7
+2024-07,Emilia Romagna Grand Prix,test,pit_out,7
+2024-07,Emilia Romagna Grand Prix,test,not_green_only,0
+2024-07,Emilia Romagna Grand Prix,test,timing_not_accurate,20
+2024-07,Emilia Romagna Grand Prix,test,deleted_or_unknown,6
+2024-07,Emilia Romagna Grand Prix,test,generated_or_unknown,0
