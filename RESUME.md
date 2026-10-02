@@ -1,6 +1,6 @@
 # PitWall continuation checkpoint
 
-Saved October 2, 2026. User is stopping for today and intends to continue tomorrow.
+Updated October 2, 2026. Engineering presentation and GitHub publication are complete.
 
 ## Project and scope
 
@@ -49,16 +49,26 @@ Open http://127.0.0.1:8501/. The server may need restarting after closing the ap
 or terminal; all study files/results are saved on disk. No download or retraining
 is needed to explore the current dashboard.
 
-## Next agreed milestone
+## Current release and next options
 
-Create a concise engineering-focused portfolio overview: question, method,
-screenshots, baseline comparisons, negative findings, public measurements versus
-estimates and limits. Then prepare the GitHub portfolio page. No remote repository,
-GitHub push or public hosting has been performed. Computer vision and additional
-model experiments remain later, separately scoped work. Preserve declared test
-results; changes to models need fresh held-out evidence.
+The engineering overview, reviewer-oriented README and full reproduction guide
+are complete. The user explicitly authorized creation/publication under m11ahmed.
+Public repository: https://github.com/m11ahmed/PitWall, default branch main.
+Origin is configured; pushes were verified against local commits. No public
+Streamlit demo has been deployed.
 
-Start with README.md, CASE_STUDY.md, WEEKEND_MODEL_CARD.md and VALIDATION.md.
-Machine-readable verification is reports/release/verification.json.
-The compact project archive is tmp/PitWall-portfolio.zip; .venv/cache/tmp and
-local secrets are excluded. Inspect git status/log for the latest checkpoint.
+Read ENGINEERING_OVERVIEW.md for questions, screenshots, baseline comparisons,
+negative findings and observation/estimate/private-data distinctions. README.md
+is the GitHub entry point; REPRODUCING.md carries full commands. GITHUB_RELEASE.md
+records repository metadata and publication procedure. The frozen analytical
+results and model bytes are unchanged.
+
+Optional next work: select and verify free public dashboard hosting. Computer
+vision and new model experiments remain separate milestones. Preserve declared
+test results; changes to models need fresh held-out evidence. Do not conflate
+public GitHub publication with a deployed interactive dashboard.
+
+For exact evidence read CASE_STUDY.md, WEEKEND_MODEL_CARD.md, VALIDATION.md and
+reports/release/verification.json. The compact project archive is
+tmp/PitWall-portfolio.zip; .venv/cache/tmp and local secrets are excluded.
+Inspect git status/log and origin/main for the latest release checkpoint.

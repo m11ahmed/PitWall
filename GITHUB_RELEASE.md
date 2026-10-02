@@ -1,10 +1,12 @@
 # GitHub presentation and release
 
 The prepared repository includes the working lab, fixed study evidence,
-engineering overview, screenshots and reproduction guide. A GitHub destination
-and authenticated publishing access are still required to publish it.
+engineering overview, screenshots and reproduction guide. It is published as
+[m11ahmed/PitWall](https://github.com/m11ahmed/PitWall), publicly on main.
+The first push was verified against the local Git commit; repository screenshots
+and documentation are checked after each presentation update.
 
-## Suggested repository details
+## Repository details
 
 - Name: PitWall
 - Description: Public F1 race-pace analysis, native telemetry inspection and conditional next-lap forecasting with whole-weekend holdouts, baseline comparisons and reproducible audits.
@@ -17,20 +19,19 @@ links are relative, so they render within the repository.
 
 ## Publishing an existing local repository
 
-Create an empty repository under the intended GitHub account, without adding a
-new README or gitignore. From G:\PitWall, replace the example owner with the real
-account. Run these only once the destination is confirmed:
+The local origin already points to m11ahmed/PitWall. For later updates, review
+and commit only the intended files, then push from G:\PitWall:
 
 ```powershell
-git remote add origin https://github.com/YOUR_USERNAME/PitWall.git
-git push -u origin main
+git status
+git push origin main
 ```
 
-GitHub authentication may be required by Git Credential Manager. No credential
+Publishing used the existing m11ahmed authentication through Git Credential Manager. No credential
 belongs in source files. If a remote already exists, inspect git remote -v first
 and use its confirmed URL rather than adding or replacing it blindly.
 
-After publishing, open the actual repository page and verify README images,
+After later pushes, open the repository page and verify README images,
 local documentation links and the repository contents. Add the real repository
 URL to the portfolio overview only after the push is verified. No hosted demo
 URL or automated CI badge is claimed by this prepared release.

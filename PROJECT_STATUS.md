@@ -27,6 +27,10 @@ Completed:
 11. Separate local Git repository, byte-preserving checkout rules and G-drive
     setup script. A clean repository export and new isolated environment passed
     all 86 tests, saved-model replay and desktop/mobile browser/download checks.
+12. Engineering overview with selected screenshots and retained negative results;
+    concise GitHub README and separate full reproduction guide.
+13. Public repository: [m11ahmed/PitWall](https://github.com/m11ahmed/PitWall),
+    with main pushed and the remote commit verified against the local repository.
 
 Telemetry coverage is narrower than timing eligibility: 64 of 101 eligible laps
 meet conservative distance-support checks. Distance/alignment are estimates.
@@ -61,6 +65,7 @@ Next work, as separately scoped milestones:
 - Consider FastAPI/React integration and public deployment.
 
 Current delivery is a runnable local portfolio with two trained, scored studies
-and verified repository setup on Windows/Python 3.14.0.
+and verified repository setup on Windows/Python 3.14.0. The code and portfolio
+documentation are published on GitHub; dashboard hosting remains future work.
 Public deployment and computer vision remain future work. No private team data,
 causal performance conclusions or team affiliation is claimed.

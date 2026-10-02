@@ -96,8 +96,9 @@ Do not normalize line endings in frozen protocol/code/data files without declari
 and regenerating a new experiment.
 
 Raw measurements remain distinct from estimates. Public data accessed through
-FastF1 are not claimed as PitWall-owned or privately sourced team data. This local
-repository preparation has not published or hosted the project.
+FastF1 are not claimed as PitWall-owned or privately sourced team data. The repository is published at
+[github.com/m11ahmed/PitWall](https://github.com/m11ahmed/PitWall). The Streamlit
+dashboard remains local; public dashboard hosting has not been performed.
 
 ## Acquire and reproduce the Bahrain study
 

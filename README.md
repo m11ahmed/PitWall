@@ -9,6 +9,8 @@ separate historical forecasting studies. The dashboard exposes exclusions,
 sampling limitations and baseline wins alongside the results. It runs locally
 without an API key or paid service.
 
+**Repository:** [m11ahmed/PitWall](https://github.com/m11ahmed/PitWall)
+
 **Start here:** [Engineering overview](ENGINEERING_OVERVIEW.md) ·
 [Bahrain case study](CASE_STUDY.md) ·
 [Whole-weekend model card](WEEKEND_MODEL_CARD.md) ·
